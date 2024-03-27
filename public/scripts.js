@@ -37,10 +37,8 @@ const addFile = async (e) => {
       };
       config.onUploadProgress = (e) => updateProgressBar(e);
       const awsResp = await axios.put(postData.signedLink, file, config);
-      console.log(awsResp);
       resolve(awsResp);
     } catch (err) {
-      console.log(err);
       reject(err);
     }
   });
