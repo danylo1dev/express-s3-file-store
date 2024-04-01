@@ -1,4 +1,3 @@
-require("dotenv").config();
 const {
   SECRET_ACCESS_KEY,
   ACCESS_KEY,
