@@ -5,17 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index",
+    "start:dev": "nodemon index",
     "start": "node index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1499.0",
+    "@aws-sdk/client-s3": "^3.540.0",
+    "aws-sdk": "^2.1589.0",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
-    "mime-types": "^2.1.35",
+    "mime-types": "^2.1.35"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.0"
   }
 }

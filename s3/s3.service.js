@@ -1,35 +1,34 @@
 const aws = require("aws-sdk");
 const config = require("./config");
+const mime = require("mime-types");
+const {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} = require("@aws-sdk/client-s3");
 
 aws.config.update(config.awsConfig);
 
-const getS3PutLink = (uniqueS3Key, mimeType) => {
-  return new Promise(async (resolve, reject) => {
-    const options = {
-      ...config.s3Options,
-    };
-    const s3 = new aws.S3(options);
-    const params = {
-      Key: uniqueS3Key,
-      ContentType: mimeType,
-      ...config.awsPutObjectParams,
-    };
-    s3.getSignedUrl("putObject", params, (err, signedLink) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(signedLink);
-    });
-  });
+const client = new S3Client({ ...config.awsConfig, ...config.s3Options });
+
+const getS3PutLink = async (uniqueS3Key, mimeType) => {
+  const params = {
+    Key: uniqueS3Key,
+    ContentType: mimeType,
+    ...config.awsPutObjectParams,
+  };
+  const putObjectCommand = new PutObjectCommand(params);
+  const response = await client.send(putObjectCommand);
+  return response;
 };
-const getS3SignedLink = (key) => {
-  const s3 = new aws.S3({});
+const getS3SignedLink = async (key) => {
   const params = {
     Key: key,
     ...config.awsGetObjectParams,
   };
-  const signedUrl = s3.getSignedUrl("getObject", params);
-  return signedUrl;
+  const getObjectCommand = new GetObjectCommand(params);
+  const response = await client.send(getObjectCommand);
+  return response;
 };
 
 module.exports = {

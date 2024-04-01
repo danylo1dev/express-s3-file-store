@@ -31,7 +31,7 @@ To get started with the project, follow these steps:
 2. Install all dependencies:
 
    ```bash
-   npm i
+   npm ci
    ```
 
 ## Environment Configuration
@@ -49,7 +49,7 @@ To run the application, use the following commands:
 - **Development**:
 
   ```bash
-  npm run dev
+  npm run start:dev
   ```
 
 - **Production**:

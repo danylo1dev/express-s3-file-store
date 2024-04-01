@@ -10,18 +10,20 @@ const {
 
 module.exports = {
   awsConfig: {
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
+    credentials: {
+      accessKeyId: ACCESS_KEY,
+      secretAccessKey: SECRET_ACCESS_KEY,
+    },
     region: DEFAULT_REGION,
     signatureVersion: SIGNATURE_VERSION,
   },
   awsGetObjectParams: {
     Bucket: DEFAULT_BUCKET,
-    Expires: +SIGNATURE_EXPIRES * 60,
+    // Expires: +SIGNATURE_EXPIRES * 60,
   },
   awsPutObjectParams: {
     Bucket: DEFAULT_BUCKET,
-    Expires: +SIGNATURE_EXPIRES,
+    // Expires: +SIGNATURE_EXPIRES,
     ACL: "private",
   },
   s3Options: {
